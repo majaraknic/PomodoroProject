@@ -5,6 +5,8 @@ import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 
@@ -17,6 +19,10 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        return userRepository.getOne(id);
+        try {
+            return userRepository.getOne(id);
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Entity with this id doesnt exist in database");
+        }
     }
 }

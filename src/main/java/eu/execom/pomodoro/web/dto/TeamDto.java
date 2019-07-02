@@ -1,5 +1,9 @@
 package eu.execom.pomodoro.web.dto;
 
+import eu.execom.pomodoro.model.Team;
+
+import static org.graalvm.compiler.options.OptionType.User;
+
 public class TeamDto {
 
 
@@ -8,12 +12,30 @@ public class TeamDto {
 
     private String name;
 
+//
+//    private List<UserDto> userId;
 
-    private UserDto user;
+    public TeamDto(Team team) {
+        this.id = team.getId();
+        this.name = team.getName();
+    }
 
-    public UserDto getUserDto() { return user; }
 
-    public void setUserDto(UserDto user) { this.user = user; }
+//    public static TeamDto from(Team team) {
+//        TeamDto dto = new TeamDto();
+//        dto.setId(team.getId());
+//        dto.setName(team.getName());
+////        dto.setUserId(dto.getUserId());
+//        return dto;
+//    }
+
+    public Team toTeam() {
+        Team team = new Team();
+        team.setId(id);
+        team.setName(name);
+        //team.setUsers(List<User> userId);
+        return team;
+    }
 
     public Long getId() {
         return id;
@@ -30,4 +52,12 @@ public class TeamDto {
     public void setName(String name) {
         this.name = name;
     }
+
+//    public Long getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Long userId) {
+//        this.userId = userId;
+//    }
 }

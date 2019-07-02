@@ -1,5 +1,7 @@
 package eu.execom.pomodoro.web.dto;
 
+import eu.execom.pomodoro.model.Pomodoro;
+
 import java.util.Date;
 
 public class PomodoroDto {
@@ -14,14 +16,39 @@ public class PomodoroDto {
     private String status;
 
 
-    private UserDto user;
+    private Long userId;
 
-    private UserDto getUserDto() {
-        return user;
+    public PomodoroDto(Pomodoro pomodoro) {
+        this.id = pomodoro.getId();
+        this.startDateTime = pomodoro.getStartDateTime();
+        this.status = pomodoro.getStatus();
+        this.userId = pomodoro.getUser().getId();
     }
 
-    private void setUserDto(UserDto users) {
-        this.user = users;
+//    public  PomodoroDto (Pomodoro pomodoro) {
+//        PomodoroDto dto = new PomodoroDto();
+//        dto.setId(dto.getId());
+//        dto.setStartDateTime(dto.getStartDateTime());
+//        dto.setStatus(dto.getStatus());
+//        dto.setUserId(dto.getUserId());
+//        return dto;
+//    }
+
+    public Pomodoro toPomodoro() {
+        Pomodoro pomodoro = new Pomodoro();
+        pomodoro.setId(id);
+        pomodoro.setStartDateTime(startDateTime);
+        pomodoro.setStatus(status);
+        //pomodoro.setUser(userId);
+        return pomodoro;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public Long getId() {

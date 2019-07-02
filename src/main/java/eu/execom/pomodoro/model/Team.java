@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team {
@@ -12,12 +13,16 @@ public class Team {
     @Column
     private String name;
 
-    @ManyToOne
-    private User user;
+    @ManyToMany(mappedBy = "teams", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<User> users;
 
-    public User getUser() { return user; }
+    public List<User> getUsers() {
+        return users;
+    }
 
-    public void setUser(User user) { this.user = user; }
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
     public Long getId() {
         return id;

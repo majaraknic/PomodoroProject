@@ -20,11 +20,11 @@ public class Pomodoro {
     @ManyToOne
     private User user;
 
-    private User getUser() {
+    public User getUser() {
         return user;
     }
 
-    private void setUser(User users) {
+    public void setUser(User users) {
         this.user = users;
     }
 

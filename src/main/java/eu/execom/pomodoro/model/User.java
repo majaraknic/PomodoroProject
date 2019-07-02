@@ -1,8 +1,5 @@
 package eu.execom.pomodoro.model;
 
-import eu.execom.pomodoro.web.dto.PomodoroDto;
-import eu.execom.pomodoro.web.dto.TeamDto;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -23,7 +20,11 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "team_members",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<Team> teams;
 
     @OneToMany(mappedBy = "user")
@@ -61,16 +62,16 @@ public class User {
         this.password = password;
     }
 
-    public List<TeamDto> getTeams() {
+    public List<Team> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<TeamDto> teams) {
+    public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
 
-    public List<PomodoroDto> getPomodoros() { return pomodoros; }
+    public List<Pomodoro> getPomodoros() { return pomodoros; }
 
-    public void setPomodoros(List<PomodoroDto> pomodoros) { this.pomodoros = pomodoros; }
+    public void setPomodoros(List<Pomodoro> pomodoros) { this.pomodoros = pomodoros; }
 
 }
