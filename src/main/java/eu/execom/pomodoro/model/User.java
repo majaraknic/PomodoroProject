@@ -1,5 +1,8 @@
 package eu.execom.pomodoro.model;
 
+import eu.execom.pomodoro.web.dto.PomodoroDto;
+import eu.execom.pomodoro.web.dto.TeamDto;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -58,16 +61,16 @@ public class User {
         this.password = password;
     }
 
-    public List<Team> getTeams() {
+    public List<TeamDto> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(List<TeamDto> teams) {
         this.teams = teams;
     }
 
-    public List<Pomodoro> getPomodoros() { return pomodoros; }
+    public List<PomodoroDto> getPomodoros() { return pomodoros; }
 
-    public void setPomodoros(List<Pomodoro> pomodoros) { this.pomodoros = pomodoros; }
+    public void setPomodoros(List<PomodoroDto> pomodoros) { this.pomodoros = pomodoros; }
 
 }

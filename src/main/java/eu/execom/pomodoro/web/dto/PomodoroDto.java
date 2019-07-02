@@ -1,8 +1,5 @@
 package eu.execom.pomodoro.web.dto;
 
-import eu.execom.pomodoro.model.User;
-
-import javax.persistence.*;
 import java.util.Date;
 
 public class PomodoroDto {
@@ -17,13 +14,13 @@ public class PomodoroDto {
     private String status;
 
 
-    private User user;
+    private UserDto user;
 
-    private User getUser() {
+    private UserDto getUserDto() {
         return user;
     }
 
-    private void setUser(User users) {
+    private void setUserDto(UserDto users) {
         this.user = users;
     }
 

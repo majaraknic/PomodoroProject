@@ -1,9 +1,7 @@
 package eu.execom.pomodoro.web.dto;
 
-import eu.execom.pomodoro.model.Pomodoro;
-import eu.execom.pomodoro.model.Team;
+import eu.execom.pomodoro.model.User;
 
-import javax.persistence.*;
 import java.util.List;
 
 public class UserDto {
@@ -19,10 +17,31 @@ public class UserDto {
     private String password;
 
 
-    private List<Team> teams;
+    private List<TeamDto> teams;
 
 
-    private List<Pomodoro> pomodoros;
+    private List<PomodoroDto> pomodoros;
+
+    public static UserDto from(User user) {
+        UserDto dto = new UserDto();
+        dto.setEmail(user.getEmail());
+        dto.setFullName(user.getFullName());
+        dto.setId(user.getId());
+        dto.setPomodoros(user.getPomodoros());
+        dto.setTeams(user.getTeams());
+        return dto;
+    }
+
+    public User toUser() {
+        User user = new User();
+        user.setFullName(fullName);
+        user.setEmail(email);
+        user.setId(id);
+        user.setPassword(password);
+        user.setPomodoros(pomodoros);
+        user.setTeams(teams);
+        return user;
+    }
 
     public Long getId() {
         return id;
@@ -56,16 +75,16 @@ public class UserDto {
         this.password = password;
     }
 
-    public List<Team> getTeams() {
+    public List<TeamDto> getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(List<TeamDto> teams) {
         this.teams = teams;
     }
 
-    public List<Pomodoro> getPomodoros() { return pomodoros; }
+    public List<PomodoroDto> getPomodoros() { return pomodoros; }
 
-    public void setPomodoros(List<Pomodoro> pomodoros) { this.pomodoros = pomodoros; }
+    public void setPomodoros(List<PomodoroDto> pomodoros) { this.pomodoros = pomodoros; }
 
 }

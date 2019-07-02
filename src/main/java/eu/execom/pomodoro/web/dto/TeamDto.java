@@ -1,9 +1,5 @@
 package eu.execom.pomodoro.web.dto;
 
-import eu.execom.pomodoro.model.User;
-
-import javax.persistence.*;
-
 public class TeamDto {
 
 
@@ -13,11 +9,11 @@ public class TeamDto {
     private String name;
 
 
-    private User user;
+    private UserDto user;
 
-    public User getUser() { return user; }
+    public UserDto getUserDto() { return user; }
 
-    public void setUser(User user) { this.user = user; }
+    public void setUserDto(UserDto user) { this.user = user; }
 
     public Long getId() {
         return id;
