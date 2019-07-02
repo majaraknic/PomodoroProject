@@ -1,29 +1,27 @@
-package eu.execom.pomodoro.model;
+package eu.execom.pomodoro.web.dto;
+
+import eu.execom.pomodoro.model.Pomodoro;
+import eu.execom.pomodoro.model.Team;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class User {
+public class UserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    @Column
+
     private String email;
 
-    @Column
+
     private String fullName;
 
-    @Column
     private String password;
 
-    @OneToMany(mappedBy = "user")
+
     private List<Team> teams;
 
-    @OneToMany(mappedBy = "user")
+
     private List<Pomodoro> pomodoros;
 
     public Long getId() {
