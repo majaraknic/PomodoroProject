@@ -74,4 +74,15 @@ public class User {
 
     public void setPomodoros(List<Pomodoro> pomodoros) { this.pomodoros = pomodoros; }
 
+    public User() {
+        super();
+    }
+
+    public User(User user) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.fullName = user.getFullName();
+        this.password = user.getPassword();
+    }
+
 }

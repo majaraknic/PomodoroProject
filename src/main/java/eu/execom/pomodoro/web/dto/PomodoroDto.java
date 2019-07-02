@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.web.dto;
 
 import eu.execom.pomodoro.model.Pomodoro;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 

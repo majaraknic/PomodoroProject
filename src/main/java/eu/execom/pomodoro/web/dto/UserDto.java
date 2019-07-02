@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+@Component
 public class UserDto {
 
     private Long id;
@@ -25,6 +27,10 @@ public class UserDto {
 
 
     private List<PomodoroDto> pomodoros;
+
+    public  UserDto(){
+        super();
+    };
 
     public UserDto (User user) {
         this.id = user.getId();

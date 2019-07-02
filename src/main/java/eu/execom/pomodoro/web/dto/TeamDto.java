@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.web.dto;
 
 import eu.execom.pomodoro.model.Team;
+import org.springframework.stereotype.Component;
 
 import static org.graalvm.compiler.options.OptionType.User;
 
@@ -19,15 +20,6 @@ public class TeamDto {
         this.id = team.getId();
         this.name = team.getName();
     }
-
-
-//    public static TeamDto from(Team team) {
-//        TeamDto dto = new TeamDto();
-//        dto.setId(team.getId());
-//        dto.setName(team.getName());
-////        dto.setUserId(dto.getUserId());
-//        return dto;
-//    }
 
     public Team toTeam() {
         Team team = new Team();
