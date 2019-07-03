@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,10 +41,20 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
+
+        if(!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
+            UserDto userDto = new UserDto();
+            userDto.setEmail(userRegistrationDto.getEmail());
+            userDto.setFullName(userRegistrationDto.getFullName());
+
+            return ResponseEntity.badRequest().body(userDto);
+        }
+
+
         User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
         User result = userService.save(user);
 
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+        return  ResponseEntity.accepted().body(new UserDto(result));
     }
 
     @PutMapping
@@ -58,4 +70,12 @@ public class UserController {
         userService.delete(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping
+    public String registrationForm(WebRequest request, Model model) {
+        UserRegistrationDto userDto = new UserRegistrationDto();
+        model.addAttribute("user", userDto);
+        return "registration";
+    }
+
 }
