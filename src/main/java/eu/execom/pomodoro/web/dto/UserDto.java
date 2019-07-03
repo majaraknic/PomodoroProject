@@ -1,11 +1,8 @@
 package eu.execom.pomodoro.web.dto;
 
-import eu.execom.pomodoro.model.Pomodoro;
-import eu.execom.pomodoro.model.Team;
 import eu.execom.pomodoro.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,18 +34,8 @@ public class UserDto {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.fullName = user.getFullName();
-//        this.pomodoros = user.getPomodoros().stream().map(PomodoroDto::new).collect(Collectors.toList());
-//        this.teams = user.getTeams().stream().map(TeamDto::new).collect(Collectors.toList());
-    }
-
-    public User toUser(UserDto userDto) {
-        User user = new User();
-        user.setId(userDto.getId());
-        user.setFullName(userDto.getFullName());
-        user.setEmail(userDto.getEmail());;
-//        user.setPomodoros(userDto.getPomodoros().stream().map(Pomodoro::new).collect(Collectors.toList());
-//        user.setTeams(userDto.getTeams().stream().map(Team::new).collect(Collectors.toList())
-        return user;
+        this.pomodoros = user.getPomodoros().stream().map(PomodoroDto::new).collect(Collectors.toList());
+        this.teams = user.getTeams().stream().map(TeamDto::new).collect(Collectors.toList());
     }
 
     public Long getId() {

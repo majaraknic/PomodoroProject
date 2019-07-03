@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class PomodoroDto {
 
 
@@ -18,6 +19,10 @@ public class PomodoroDto {
 
 
     private Long userId;
+
+    public PomodoroDto() {
+        super();
+    }
 
     public PomodoroDto(Pomodoro pomodoro) {
         this.id = pomodoro.getId();

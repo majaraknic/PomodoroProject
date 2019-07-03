@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,10 +26,10 @@ public class User {
             name = "team_members",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Pomodoro> pomodoros;
+    private List<Pomodoro> pomodoros = new ArrayList<>();
 
     public Long getId() {
         return id;

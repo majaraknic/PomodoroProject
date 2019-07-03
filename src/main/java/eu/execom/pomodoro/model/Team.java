@@ -39,4 +39,13 @@ public class Team {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Team() {
+        super();
+    }
+
+    public Team(Team team) {
+        this.id = team.getId();
+        this.name = team.getName();
+    }
 }

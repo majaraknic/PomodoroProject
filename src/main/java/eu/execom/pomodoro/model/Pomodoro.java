@@ -20,6 +20,17 @@ public class Pomodoro {
     @ManyToOne
     private User user;
 
+    public Pomodoro() {
+        super();
+    }
+
+    public Pomodoro(Pomodoro pomodoro) {
+        this.id = pomodoro.getId();
+        this.startDateTime = pomodoro.getStartDateTime();
+        this.status = pomodoro.getStatus();
+        this.user = pomodoro.getUser();
+    }
+
     public User getUser() {
         return user;
     }

@@ -27,9 +27,6 @@ public class TeamService {
     }
 
     public void delete(Long id) {
-//        if (!teamRepository.existsById(id)) {
-//
-//        }
         teamRepository.deleteById(id);
     }
 

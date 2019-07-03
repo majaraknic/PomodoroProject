@@ -3,30 +3,26 @@ package eu.execom.pomodoro.web.dto;
 import eu.execom.pomodoro.model.Team;
 import org.springframework.stereotype.Component;
 
-import static org.graalvm.compiler.options.OptionType.User;
+import java.util.List;
 
+@Component
 public class TeamDto {
-
 
     private Long id;
 
 
     private String name;
 
-//
-//    private List<UserDto> userId;
+    private List<UserDto> userDtos;
+
+    public TeamDto() {
+        super();
+    }
 
     public TeamDto(Team team) {
         this.id = team.getId();
         this.name = team.getName();
-    }
-
-    public Team toTeam() {
-        Team team = new Team();
-        team.setId(id);
-        team.setName(name);
-        //team.setUsers(List<User> userId);
-        return team;
+//        this.userDtos = team.getUsers().stream().map(user -> new UserDto(user)).collect(Collectors.toList());
     }
 
     public Long getId() {
@@ -45,11 +41,11 @@ public class TeamDto {
         this.name = name;
     }
 
-//    public Long getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(Long userId) {
-//        this.userId = userId;
-//    }
+    public List<UserDto> getUserDtos() {
+        return userDtos;
+    }
+
+    public void setUserDtos(List<UserDto> userDtos) {
+        this.userDtos = userDtos;
+    }
 }
