@@ -1,7 +1,7 @@
 package eu.execom.pomodoro.model;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Pomodoro {
@@ -12,7 +12,7 @@ public class Pomodoro {
     private Long id;
 
     @Column
-    private Date startDateTime;
+    private LocalDate startDateTime;
 
     @Column
     private String status;
@@ -47,11 +47,11 @@ public class Pomodoro {
         this.id = id;
     }
 
-    public Date getStartDateTime() {
+    public LocalDate getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(Date startDateTime) {
+    public void setStartDateTime(LocalDate startDateTime) {
         this.startDateTime = startDateTime;
     }
 

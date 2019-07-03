@@ -13,7 +13,7 @@ public class TeamDto {
 
     private String name;
 
-    private List<UserDto> userDtos;
+    private List<UserDto> users;
 
     public TeamDto() {
         super();
@@ -42,10 +42,10 @@ public class TeamDto {
     }
 
     public List<UserDto> getUserDtos() {
-        return userDtos;
+        return users;
     }
 
     public void setUserDtos(List<UserDto> userDtos) {
-        this.userDtos = userDtos;
+        this.users = userDtos;
     }
 }

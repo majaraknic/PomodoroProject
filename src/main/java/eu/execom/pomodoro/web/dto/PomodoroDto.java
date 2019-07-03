@@ -3,7 +3,8 @@ package eu.execom.pomodoro.web.dto;
 import eu.execom.pomodoro.model.Pomodoro;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Component
 public class PomodoroDto {
@@ -12,7 +13,7 @@ public class PomodoroDto {
     private Long id;
 
 
-    private Date startDateTime;
+    private LocalDateTime startDateTime = LocalDateTime.now();
 
 
     private String status;
@@ -26,27 +27,8 @@ public class PomodoroDto {
 
     public PomodoroDto(Pomodoro pomodoro) {
         this.id = pomodoro.getId();
-        this.startDateTime = pomodoro.getStartDateTime();
         this.status = pomodoro.getStatus();
         this.userId = pomodoro.getUser().getId();
-    }
-
-//    public  PomodoroDto (Pomodoro pomodoro) {
-//        PomodoroDto dto = new PomodoroDto();
-//        dto.setId(dto.getId());
-//        dto.setStartDateTime(dto.getStartDateTime());
-//        dto.setStatus(dto.getStatus());
-//        dto.setUserId(dto.getUserId());
-//        return dto;
-//    }
-
-    public Pomodoro toPomodoro() {
-        Pomodoro pomodoro = new Pomodoro();
-        pomodoro.setId(id);
-        pomodoro.setStartDateTime(startDateTime);
-        pomodoro.setStatus(status);
-        //pomodoro.setUser(userId);
-        return pomodoro;
     }
 
     public void setUserId(Long userId) {
@@ -65,11 +47,11 @@ public class PomodoroDto {
         this.id = id;
     }
 
-    public Date getStartDateTime() {
+    public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
 
-    public void setStartDateTime(Date startDateTime) {
+    public void setStartDateTime(LocalDateTime startDateTime) {
         this.startDateTime = startDateTime;
     }
 

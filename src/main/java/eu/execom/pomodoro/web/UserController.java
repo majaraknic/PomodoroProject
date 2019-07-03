@@ -3,6 +3,7 @@ package eu.execom.pomodoro.web;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.service.UserService;
 import eu.execom.pomodoro.web.dto.UserDto;
+import eu.execom.pomodoro.web.dto.UserRegistrationDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,11 +38,11 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody UserDto userDto) {
-        User user = MODEL_MAPPER.map(userDto, User.class);
+    public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
+        User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
         User result = userService.save(user);
 
-        return new ResponseEntity(new UserDto(result), HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PutMapping
