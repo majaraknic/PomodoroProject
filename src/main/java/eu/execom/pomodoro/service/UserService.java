@@ -5,6 +5,7 @@ import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @Service
@@ -27,9 +28,9 @@ public class UserService {
     }
 
     public void delete(Long id) {
-//        if (!userRepository.existsById(id)) {
-//
-//        }
+       if (!userRepository.existsById(id)) {
+           throw new EntityExistsException("User with this id doesn't exist in database.");
+        }
         userRepository.deleteById(id);
     }
 
