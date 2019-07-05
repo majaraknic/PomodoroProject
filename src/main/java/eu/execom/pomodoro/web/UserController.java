@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -41,7 +40,7 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
 
-        if(!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
+        if(!(userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation()))) {
             UserDto userDto = new UserDto();
             userDto.setEmail(userRegistrationDto.getEmail());
             userDto.setFullName(userRegistrationDto.getFullName());

@@ -1,4 +1,4 @@
-<div ng-controller="UserController">
+<div ng-controller="editUserCtrl">
     <h1>Edit user</h1>
     <form class="table table-default">
         <label for="email">Email</label>
@@ -10,6 +10,6 @@
         <label for="FullName">Full name</label>
         <input ng-model="user.fullName" id="fullName">
 
-        <button ng-click="edit()">Save</button>
+        <button ng-click="create()">Save</button>
     </form>
 </div>
