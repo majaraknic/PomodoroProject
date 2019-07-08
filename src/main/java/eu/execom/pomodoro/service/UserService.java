@@ -22,10 +22,6 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new EntityExistsException("User with this id doesn't exist in database.");
-        }
-
         return userRepository.getOne(id);
     }
 
@@ -33,7 +29,7 @@ public class UserService {
 
         try {
             savedUser = userRepository.save(user);
-        } catch (EntityExistsException e){
+        } catch (EntityExistsException e) {
             System.out.println("This entity already exists in database.");
         }
         return savedUser;
