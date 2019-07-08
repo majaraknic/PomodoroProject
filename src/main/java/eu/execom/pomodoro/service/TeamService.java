@@ -14,7 +14,6 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    @Autowired
     private Team savedTeam;
 
     public List<Team> getAll() {
@@ -26,11 +25,7 @@ public class TeamService {
     }
 
     public Team save(Team team) {
-        try {
-            savedTeam = teamRepository.save(team);
-        } catch (EntityExistsException e){
-            System.out.println("This entity already exists in database.");
-        }
+        savedTeam = teamRepository.save(team);
         return savedTeam;
     }
 

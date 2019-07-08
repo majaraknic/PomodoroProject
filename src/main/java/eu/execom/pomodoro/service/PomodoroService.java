@@ -14,19 +14,18 @@ public class PomodoroService {
     @Autowired
     private PomodoroRepository pomodoroRepository;
 
-    @Autowired
     private Pomodoro savedPomodoro;
 
-    public List<Pomodoro> getAll() { return pomodoroRepository.findAll(); }
+    public List<Pomodoro> getAll() {
+        return pomodoroRepository.findAll();
+    }
 
-    public Pomodoro getById(Long id) { return pomodoroRepository.getOne(id); }
+    public Pomodoro getById(Long id) {
+        return pomodoroRepository.getOne(id);
+    }
 
     public Pomodoro save(Pomodoro pomodoro) {
-        try {
-            savedPomodoro = pomodoroRepository.save(pomodoro);
-        } catch (EntityExistsException e){
-            System.out.println("This entity already exists in database.");
-        }
+        savedPomodoro = pomodoroRepository.save(pomodoro);
         return savedPomodoro;
     }
 

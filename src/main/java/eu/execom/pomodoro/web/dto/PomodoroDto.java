@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.web.dto;
 
 import eu.execom.pomodoro.model.Pomodoro;
+import eu.execom.pomodoro.model.enumerations.Status;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public class PomodoroDto {
     private LocalDateTime startDateTime = LocalDateTime.now();
 
 
-    private String status;
+    private Status status;
 
 
     private Long userId;
@@ -55,11 +56,11 @@ public class PomodoroDto {
         this.startDateTime = startDateTime;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

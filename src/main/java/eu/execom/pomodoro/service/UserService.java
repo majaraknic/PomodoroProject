@@ -14,8 +14,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private User savedUser = new User();
+    private User savedUser;
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -26,12 +25,7 @@ public class UserService {
     }
 
     public User save(User user) {
-
-        try {
-            savedUser = userRepository.save(user);
-        } catch (EntityExistsException e) {
-            System.out.println("This entity already exists in database.");
-        }
+        savedUser = userRepository.save(user);
         return savedUser;
     }
 

@@ -1,5 +1,7 @@
 package eu.execom.pomodoro.model;
 
+import eu.execom.pomodoro.model.enumerations.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -15,7 +17,7 @@ public class Pomodoro {
     private LocalDate startDateTime;
 
     @Column
-    private String status;
+    private Status status;
 
     @ManyToOne
     private User user;
@@ -55,11 +57,11 @@ public class Pomodoro {
         this.startDateTime = startDateTime;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
