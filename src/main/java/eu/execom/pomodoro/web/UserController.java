@@ -1,5 +1,8 @@
 package eu.execom.pomodoro.web;
 
+import eu.execom.pomodoro.exceptions.NoEntityException;
+import eu.execom.pomodoro.exceptions.NotValidPasswordException;
+import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.service.UserService;
 import eu.execom.pomodoro.web.dto.UserDto;
@@ -34,6 +37,10 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+//        UserDto userDto = new UserDto();
+//        if(userDto.getId() != id) {
+//            throw new NoEntityException("This entity was not found in database.");
+//        }
         User user = userService.getById(id);
         return new ResponseEntity(new UserDto(user), HttpStatus.OK);
     }
@@ -41,12 +48,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
 
-        if(!(userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation()))) {
-            UserDto userDto = new UserDto();
-            userDto.setEmail(userRegistrationDto.getEmail());
-            userDto.setFullName(userRegistrationDto.getFullName());
+        if(!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
+            throw new NotValidPasswordException("Passwords doesn't match!");
+        }
 
-            return ResponseEntity.badRequest().body(userDto);
+        if(userRegistrationDto.getPassword().length() < 7) {
+            throw new NumberOfCharactersException("Password must have at least 7 characters!");
         }
 
 
