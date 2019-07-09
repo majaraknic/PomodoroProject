@@ -9,7 +9,6 @@ import eu.execom.pomodoro.web.dto.UserDto;
 import eu.execom.pomodoro.web.dto.UserRegistrationDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +36,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getById(@PathVariable Long id) {
-//        UserDto userDto = new UserDto();
-//        if(userDto.getId() != id) {
-//            throw new NoEntityException("This entity was not found in database.");
-//        }
         User user = userService.getById(id);
         return new ResponseEntity(new UserDto(user), HttpStatus.OK);
     }
@@ -48,27 +43,35 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
 
-        if(!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
-            throw new NotValidPasswordException("Passwords doesn't match!");
-        }
-
-        if(userRegistrationDto.getPassword().length() < 7) {
-            throw new NumberOfCharactersException("Password must have at least 7 characters!");
-        }
-
+//        if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
+//            throw new NotValidPasswordException("Passwords doesn't match!");
+//        }
+//
+//        if (userRegistrationDto.getPassword().length() < 5) {
+//            throw new NumberOfCharactersException("Password must have at least 5 characters!");
+//        }
 
         User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
+
+//        if(use) {
+//            throw new SameStringException("Email already exists!");
+//        }
+
         User result = userService.save(user);
 
-        return  ResponseEntity.accepted().body(new UserDto(result));
+        return ResponseEntity.accepted().body(new UserDto(result));
     }
 
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {
         User user = MODEL_MAPPER.map(userDto, User.class);
-        User result = userService.save(user);
+        if (user.getId() != userDto.getId()) {
+            throw new NoEntityException("Entity with this id doesn't exist.");
+        } else {
+            User result = userService.save(user);
 
-        return new ResponseEntity(new UserDto(result), HttpStatus.OK);
+            return new ResponseEntity(new UserDto(result), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/{id}")

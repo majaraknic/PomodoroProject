@@ -1,5 +1,6 @@
 package eu.execom.pomodoro.web;
 
+import eu.execom.pomodoro.exceptions.NoEntityException;
 import eu.execom.pomodoro.model.Pomodoro;
 import eu.execom.pomodoro.service.PomodoroService;
 import eu.execom.pomodoro.web.dto.PomodoroDto;
@@ -46,9 +47,13 @@ public class PomodoroController {
     @PutMapping
     public ResponseEntity<PomodoroDto> update(@RequestBody PomodoroDto pomodoroDto) {
         Pomodoro pomodoro = MODEL_MAPPER.map(pomodoroDto, Pomodoro.class);
-        Pomodoro result = pomodoroService.save(pomodoro);
+        if (pomodoro.getId() != pomodoroDto.getId()) {
+            throw new NoEntityException("Entity with this id doesn't exist.");
+        } else {
+            Pomodoro result = pomodoroService.save(pomodoro);
 
-        return new ResponseEntity(new PomodoroDto(result), HttpStatus.OK);
+            return new ResponseEntity(new PomodoroDto(result), HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/{id}")

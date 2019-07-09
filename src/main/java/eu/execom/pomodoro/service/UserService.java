@@ -1,5 +1,6 @@
 package eu.execom.pomodoro.service;
 
+import eu.execom.pomodoro.exceptions.SameStringException;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,11 @@ public class UserService {
     }
 
     public User save(User user) {
-        savedUser = userRepository.save(user);
-        return savedUser;
+        if(userRepository.existsByEmail(user.getEmail())) {
+            throw new SameStringException("User with this email already exists in database.");
+        }
+
+        return userRepository.save(user);
     }
 
     public void delete(Long id) {
