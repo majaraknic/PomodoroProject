@@ -20,7 +20,7 @@ public class UserDto {
     private String password;
 
 
-    private TeamDto teams;
+    private TeamDto team;
 
 
     private List<PomodoroDto> pomodoros;
@@ -35,7 +35,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.fullName = user.getFullName();
         this.pomodoros = user.getPomodoros().stream().map(PomodoroDto::new).collect(Collectors.toList());
-        this.teams = user.getTeams();
+        this.team = user.getTeam();
     }
 
     public Long getId() {
@@ -62,12 +62,12 @@ public class UserDto {
         this.fullName = fullName;
     }
 
-    public TeamDto getTeams() {
-        return teams;
+    public TeamDto getTeam() {
+        return team;
     }
 
-    public void setTeams(TeamDto teams) {
-        this.teams = teams;
+    public void setTeam(TeamDto team) {
+        this.team = team;
     }
 
     public List<PomodoroDto> getPomodoros() { return pomodoros; }

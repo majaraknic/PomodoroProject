@@ -22,7 +22,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    private Team teams;
+    private Team team;
 
     @OneToMany(mappedBy = "user")
     private List<Pomodoro> pomodoros = new ArrayList<>();
@@ -59,12 +59,12 @@ public class User {
         this.password = password;
     }
 
-    public Team getTeams() {
-        return teams;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setTeams(Team teams) {
-        this.teams = teams;
+    public void setTeams(Team team) {
+        this.team = team;
     }
 
     public List<Pomodoro> getPomodoros() { return pomodoros; }

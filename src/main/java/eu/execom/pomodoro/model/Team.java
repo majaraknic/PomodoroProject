@@ -3,6 +3,7 @@ package eu.execom.pomodoro.model;
 import eu.execom.pomodoro.web.dto.TeamDto;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Team extends TeamDto {
@@ -14,14 +15,14 @@ public class Team extends TeamDto {
     @Column
     private String name;
 
-    @ManyToOne
-    private User users;
+    @OneToMany
+    private List<User> users;
 
-    public User getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(User users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
