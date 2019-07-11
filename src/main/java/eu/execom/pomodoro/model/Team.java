@@ -1,10 +1,11 @@
 package eu.execom.pomodoro.model;
 
+import eu.execom.pomodoro.web.dto.TeamDto;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-public class Team {
+public class Team extends TeamDto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
@@ -13,14 +14,14 @@ public class Team {
     @Column
     private String name;
 
-    @ManyToMany(mappedBy = "teams", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<User> users;
+    @ManyToOne
+    private User users;
 
-    public List<User> getUsers() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 

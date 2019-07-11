@@ -21,12 +21,8 @@ public class User {
     @Column
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(
-            name = "team_members",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<Team> teams = new ArrayList<>();
+    @ManyToOne
+    private Team teams;
 
     @OneToMany(mappedBy = "user")
     private List<Pomodoro> pomodoros = new ArrayList<>();
@@ -63,11 +59,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Team> getTeams() {
+    public Team getTeams() {
         return teams;
     }
 
-    public void setTeams(List<Team> teams) {
+    public void setTeams(Team teams) {
         this.teams = teams;
     }
 
