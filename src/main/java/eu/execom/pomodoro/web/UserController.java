@@ -43,19 +43,15 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
 
-//        if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
-//            throw new NotValidPasswordException("Passwords doesn't match!");
-//        }
-//
-//        if (userRegistrationDto.getPassword().length() < 5) {
-//            throw new NumberOfCharactersException("Password must have at least 5 characters!");
-//        }
+        if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
+            throw new NotValidPasswordException("Passwords doesn't match!");
+        }
+
+        if (userRegistrationDto.getPassword().length() < 5) {
+            throw new NumberOfCharactersException("Password must have at least 5 characters!");
+        }
 
         User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
-
-//        if(use) {
-//            throw new SameStringException("Email already exists!");
-//        }
 
         User result = userService.save(user);
 

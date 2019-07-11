@@ -47,13 +47,13 @@ public class PomodoroController {
     @PutMapping
     public ResponseEntity<PomodoroDto> update(@RequestBody PomodoroDto pomodoroDto) {
         Pomodoro pomodoro = MODEL_MAPPER.map(pomodoroDto, Pomodoro.class);
-        if (pomodoro.getId() != pomodoroDto.getId()) {
-            throw new NoEntityException("Entity with this id doesn't exist.");
-        } else {
+//        if (pomodoro.getId() != pomodoroDto.getId()) {
+//          throw new NoEntityException("Entity with this id doesn't exist.");
+//        } else {
             Pomodoro result = pomodoroService.save(pomodoro);
 
             return new ResponseEntity(new PomodoroDto(result), HttpStatus.OK);
-        }
+//        }
     }
 
     @DeleteMapping("/{id}")
