@@ -1,5 +1,7 @@
 package eu.execom.pomodoro.model;
 
+import eu.execom.pomodoro.model.enumerations.Role;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,9 @@ public class User {
 
     @ManyToOne
     private Team team;
+
+    @Column
+    private Role role;
 
     @OneToMany(mappedBy = "user")
     private List<Pomodoro> pomodoros = new ArrayList<>();
@@ -67,9 +72,25 @@ public class User {
         this.team = team;
     }
 
-    public List<Pomodoro> getPomodoros() { return pomodoros; }
+    public List<Pomodoro> getPomodoros() {
+        return pomodoros;
+    }
 
-    public void setPomodoros(List<Pomodoro> pomodoros) { this.pomodoros = pomodoros; }
+    public void setPomodoros(List<Pomodoro> pomodoros) {
+        this.pomodoros = pomodoros;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public User() {
         super();
@@ -80,6 +101,8 @@ public class User {
         this.email = user.getEmail();
         this.fullName = user.getFullName();
         this.password = user.getPassword();
+        this.role = user.getRole();
+        this.team = user.getTeam();
     }
 
 }

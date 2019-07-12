@@ -1,21 +1,36 @@
 package eu.execom.pomodoro.service;
 
 import eu.execom.pomodoro.exceptions.SameStringException;
+import eu.execom.pomodoro.model.CustomUserDetails;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
 
-    private User savedUser;
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> optionalUser = userRepository.findByEmail(username);
+
+        if (!optionalUser.isPresent()) {
+            throw new UsernameNotFoundException("Username not found.");
+        }
+        User user = optionalUser.get();
+
+        return new CustomUserDetails(user);
+    }
 
     public List<User> getAll() {
         return userRepository.findAll();
@@ -26,7 +41,7 @@ public class UserService {
     }
 
     public User save(User user) {
-        if(userRepository.existsByEmail(user.getEmail())) {
+        if (userRepository.existsByEmail(user.getEmail())) {
             throw new SameStringException("User with this email already exists in database.");
         }
 
@@ -39,6 +54,4 @@ public class UserService {
         }
         userRepository.deleteById(id);
     }
-
-
 }
