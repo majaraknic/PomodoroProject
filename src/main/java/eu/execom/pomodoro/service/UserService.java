@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.service;
 
 import eu.execom.pomodoro.exceptions.DataViolationException;
+import eu.execom.pomodoro.exceptions.InvalidUsernameException;
 import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
 import eu.execom.pomodoro.model.CustomUserDetails;
 import eu.execom.pomodoro.model.User;
@@ -8,7 +9,6 @@ import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -22,11 +22,11 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         Optional<User> optionalUser = userRepository.findByEmail(username);
 
         if (!optionalUser.isPresent()) {
-            throw new UsernameNotFoundException("Username not found.");
+            throw new InvalidUsernameException("Username not found.");
         }
         User user = optionalUser.get();
 

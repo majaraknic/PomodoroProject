@@ -21,6 +21,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
     }
 
+    @ExceptionHandler(InvalidUsernameException.class)
+    public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, InvalidUsernameException ex) {
+
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+    }
+
     @ExceptionHandler(SameStringException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, SameStringException ex) {
 
