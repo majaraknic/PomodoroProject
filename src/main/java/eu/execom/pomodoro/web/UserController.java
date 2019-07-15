@@ -2,7 +2,6 @@ package eu.execom.pomodoro.web;
 
 import eu.execom.pomodoro.exceptions.NoEntityException;
 import eu.execom.pomodoro.exceptions.NotValidPasswordException;
-import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
 import eu.execom.pomodoro.model.Pomodoro;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.service.PomodoroService;
