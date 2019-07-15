@@ -4,6 +4,7 @@ import eu.execom.pomodoro.model.enumerations.Status;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Pomodoro {
@@ -14,12 +15,12 @@ public class Pomodoro {
     private Long id;
 
     @Column
-    private LocalDate startDateTime;
+    private LocalDateTime startDateTime;
 
     @Column
     private Status status;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Pomodoro() {
@@ -49,14 +50,6 @@ public class Pomodoro {
         this.id = id;
     }
 
-    public LocalDate getStartDateTime() {
-        return startDateTime;
-    }
-
-    public void setStartDateTime(LocalDate startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
     public Status getStatus() {
         return status;
     }
@@ -65,5 +58,12 @@ public class Pomodoro {
         this.status = status;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
 }
 

@@ -1,11 +1,14 @@
 package eu.execom.pomodoro.service;
 
 import eu.execom.pomodoro.model.Pomodoro;
+import eu.execom.pomodoro.model.User;
+import eu.execom.pomodoro.model.enumerations.Status;
 import eu.execom.pomodoro.repository.PomodoroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,8 +16,6 @@ public class PomodoroService {
 
     @Autowired
     private PomodoroRepository pomodoroRepository;
-
-    private Pomodoro savedPomodoro;
 
     public List<Pomodoro> getAll() {
         return pomodoroRepository.findAll();
@@ -25,8 +26,19 @@ public class PomodoroService {
     }
 
     public Pomodoro save(Pomodoro pomodoro) {
-        savedPomodoro = pomodoroRepository.save(pomodoro);
-        return savedPomodoro;
+        if(pomodoro.getStatus().equals(Status.START)) {
+            pomodoro.setStartDateTime(LocalDateTime.now());
+        }
+        pomodoroRepository.save(pomodoro);
+        return pomodoroRepository.save(pomodoro);
+    }
+
+    public Pomodoro createNewPomodoro(User user) {
+        Pomodoro pomodoro = new Pomodoro();
+        pomodoro.setStatus(Status.STOP);
+        pomodoro.setUser(user);
+        user.setPomodoro(pomodoro);
+        return pomodoroRepository.save(pomodoro);
     }
 
     public void delete(Long id) {

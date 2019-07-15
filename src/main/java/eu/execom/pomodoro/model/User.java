@@ -3,8 +3,6 @@ package eu.execom.pomodoro.model;
 import eu.execom.pomodoro.model.enumerations.Role;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class User {
@@ -29,8 +27,8 @@ public class User {
     @Column
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Pomodoro> pomodoros = new ArrayList<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    private Pomodoro pomodoro;
 
     public Long getId() {
         return id;
@@ -72,14 +70,6 @@ public class User {
         this.team = team;
     }
 
-    public List<Pomodoro> getPomodoros() {
-        return pomodoros;
-    }
-
-    public void setPomodoros(List<Pomodoro> pomodoros) {
-        this.pomodoros = pomodoros;
-    }
-
     public void setTeam(Team team) {
         this.team = team;
     }
@@ -90,6 +80,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Pomodoro getPomodoro() {
+        return pomodoro;
+    }
+
+    public void setPomodoro(Pomodoro pomodoro) {
+        this.pomodoro = pomodoro;
     }
 
     public User() {

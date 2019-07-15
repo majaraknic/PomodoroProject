@@ -1,7 +1,5 @@
 package eu.execom.pomodoro.web;
 
-import eu.execom.pomodoro.exceptions.NoEntityException;
-import eu.execom.pomodoro.exceptions.SameStringException;
 import eu.execom.pomodoro.model.Team;
 import eu.execom.pomodoro.service.TeamService;
 import eu.execom.pomodoro.web.dto.TeamDto;
@@ -41,10 +39,6 @@ public class TeamController {
     public ResponseEntity<TeamDto> create(@RequestBody TeamDto teamDto) {
         Team team = MODEL_MAPPER.map(teamDto, Team.class);
 
-        if(team.getName().equals(teamDto.getName())) {
-            throw new SameStringException("Teams must have different names!");
-        }
-
         Team result = teamService.save(team);
 
         return new ResponseEntity(new TeamDto(result), HttpStatus.OK);
@@ -53,13 +47,10 @@ public class TeamController {
     @PutMapping
     public ResponseEntity<TeamDto> update(@RequestBody TeamDto teamDto) {
         Team team = MODEL_MAPPER.map(teamDto, Team.class);
-//        if (team.getId() != teamDto.getId()) {
-//            throw new NoEntityException("Entity with this id doesn't exist.");
-//        } else {
-            Team result = teamService.save(team);
 
-            return new ResponseEntity(new TeamDto(result), HttpStatus.OK);
-//        }
+        Team result = teamService.save(team);
+
+        return new ResponseEntity(new TeamDto(result), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

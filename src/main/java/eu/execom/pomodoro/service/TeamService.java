@@ -1,5 +1,6 @@
 package eu.execom.pomodoro.service;
 
+import eu.execom.pomodoro.exceptions.SameStringException;
 import eu.execom.pomodoro.model.Team;
 import eu.execom.pomodoro.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,10 @@ public class TeamService {
     }
 
     public Team save(Team team) {
+
+        if(teamRepository.existsByName(team.getName())) {
+            throw new SameStringException("Teams must have different names!");
+        }
         savedTeam = teamRepository.save(team);
         return savedTeam;
     }

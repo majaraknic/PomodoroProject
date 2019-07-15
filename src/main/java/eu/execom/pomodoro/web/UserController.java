@@ -3,7 +3,9 @@ package eu.execom.pomodoro.web;
 import eu.execom.pomodoro.exceptions.NoEntityException;
 import eu.execom.pomodoro.exceptions.NotValidPasswordException;
 import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
+import eu.execom.pomodoro.model.Pomodoro;
 import eu.execom.pomodoro.model.User;
+import eu.execom.pomodoro.service.PomodoroService;
 import eu.execom.pomodoro.service.UserService;
 import eu.execom.pomodoro.web.dto.UserDto;
 import eu.execom.pomodoro.web.dto.UserRegistrationDto;
@@ -27,6 +29,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PomodoroService pomodoroService;
+
     @GetMapping
     public ResponseEntity<List<UserDto>> getAll() {
         List<User> users = userService.getAll();
@@ -41,21 +46,22 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody UserRegistrationDto userRegistrationDto) {
+    public ResponseEntity create(@RequestBody UserRegistrationDto userRegistrationDto) {
+        validatePassword(userRegistrationDto);
+
+        User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
+
+        User createdUser = userService.save(user);
+        Pomodoro pomodoro = pomodoroService.createNewPomodoro(createdUser);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private void validatePassword(@RequestBody UserRegistrationDto userRegistrationDto) {
 
         if (!userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation())) {
             throw new NotValidPasswordException("Passwords doesn't match!");
         }
-
-        if (userRegistrationDto.getPassword().length() < 5) {
-            throw new NumberOfCharactersException("Password must have at least 5 characters!");
-        }
-
-        User user = MODEL_MAPPER.map(userRegistrationDto, User.class);
-
-        User result = userService.save(user);
-
-        return ResponseEntity.accepted().body(new UserDto(result));
     }
 
     @PutMapping

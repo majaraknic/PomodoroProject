@@ -3,27 +3,20 @@ package eu.execom.pomodoro.web.dto;
 import eu.execom.pomodoro.model.User;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Component
 public class UserDto {
 
     private Long id;
 
-
     private String email;
-
 
     private String fullName;
 
     private String password;
 
-
     private TeamDto team;
 
-
-    private List<PomodoroDto> pomodoros;
+    private PomodoroDto pomodoro;
 
     public  UserDto(){
         super();
@@ -34,8 +27,8 @@ public class UserDto {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.fullName = user.getFullName();
-        this.pomodoros = user.getPomodoros().stream().map(PomodoroDto::new).collect(Collectors.toList());
         this.team = user.getTeam();
+        this.pomodoro = new PomodoroDto(user.getPomodoro());
     }
 
     public Long getId() {
@@ -70,8 +63,11 @@ public class UserDto {
         this.team = team;
     }
 
-    public List<PomodoroDto> getPomodoros() { return pomodoros; }
+    public PomodoroDto getPomodoro() {
+        return pomodoro;
+    }
 
-    public void setPomodoros(List<PomodoroDto> pomodoros) { this.pomodoros = pomodoros; }
-
+    public void setPomodoro(PomodoroDto pomodoro) {
+        this.pomodoro = pomodoro;
+    }
 }

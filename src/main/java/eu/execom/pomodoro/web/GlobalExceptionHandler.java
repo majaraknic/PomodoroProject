@@ -1,9 +1,6 @@
 package eu.execom.pomodoro.web;
 
-import eu.execom.pomodoro.exceptions.NoEntityException;
-import eu.execom.pomodoro.exceptions.NotValidPasswordException;
-import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
-import eu.execom.pomodoro.exceptions.SameStringException;
+import eu.execom.pomodoro.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,6 +14,12 @@ import java.util.Map;
 
 @ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(DataViolationException.class)
+    public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, DataViolationException ex) {
+
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+    }
 
     @ExceptionHandler(SameStringException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, SameStringException ex) {

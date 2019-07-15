@@ -5,7 +5,7 @@ import javax.persistence.EntityNotFoundException;
 public class NoEntityException extends EntityNotFoundException {
 
     public NoEntityException(String message) {
-        super();
+        super(message);
     }
 
 }

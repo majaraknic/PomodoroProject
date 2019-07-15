@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.service;
 
-import eu.execom.pomodoro.exceptions.SameStringException;
+import eu.execom.pomodoro.exceptions.DataViolationException;
+import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
 import eu.execom.pomodoro.model.CustomUserDetails;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.repository.UserRepository;
@@ -41,17 +42,33 @@ public class UserService implements UserDetailsService {
     }
 
     public User save(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new SameStringException("User with this email already exists in database.");
-        }
+        validatePasswordLength(user);
+        validateEmailExistence(user);
 
         return userRepository.save(user);
     }
 
+    private void validateEmailExistence(User user) {
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new DataViolationException("User with this email already exists in database.");
+        }
+    }
+
+    private void validatePasswordLength(User user) {
+        if (user.getPassword().length() < 5) {
+            throw new NumberOfCharactersException("Password must have at least 5 characters!");
+        }
+    }
+
     public void delete(Long id) {
+        checkIfUserExists(id);
+
+        userRepository.deleteById(id);
+    }
+
+    private void checkIfUserExists(Long id) {
         if (!userRepository.existsById(id)) {
             throw new EntityExistsException("User with this id doesn't exist in database.");
         }
-        userRepository.deleteById(id);
     }
 }

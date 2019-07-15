@@ -10,15 +10,11 @@ import java.time.LocalDateTime;
 @Component
 public class PomodoroDto {
 
-
     private Long id;
 
-
-    private LocalDateTime startDateTime = LocalDateTime.now();
-
+    private LocalDateTime startDateTime;
 
     private Status status;
-
 
     private Long userId;
 
@@ -29,6 +25,7 @@ public class PomodoroDto {
     public PomodoroDto(Pomodoro pomodoro) {
         this.id = pomodoro.getId();
         this.status = pomodoro.getStatus();
+        this.startDateTime = pomodoro.getStartDateTime();
         this.userId = pomodoro.getUser().getId();
     }
 
