@@ -3,7 +3,6 @@ package eu.execom.pomodoro.model;
 import eu.execom.pomodoro.model.enumerations.Status;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
