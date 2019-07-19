@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Map;
@@ -18,25 +17,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataViolationException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, DataViolationException ex) {
 
-        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidUsernameException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, InvalidUsernameException ex) {
 
-        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(SameStringException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, SameStringException ex) {
 
-        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NumberOfCharactersException.class)
     public ResponseEntity<Map<String, String>> handle(HttpServletRequest request, NumberOfCharactersException ex) {
 
-        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.LENGTH_REQUIRED);
+        return new ResponseEntity<>(Collections.singletonMap("error", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotValidPasswordException.class)

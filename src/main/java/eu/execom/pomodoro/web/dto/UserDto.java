@@ -16,19 +16,16 @@ public class UserDto {
 
     private TeamDto team;
 
-    private PomodoroDto pomodoro;
-
-    public  UserDto(){
+    public UserDto() {
         super();
-    };
+    }
 
-    public UserDto (User user) {
+    public UserDto(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.fullName = user.getFullName();
-        this.team = user.getTeam();
-        this.pomodoro = new PomodoroDto(user.getPomodoro());
+        this.team = user.getTeam() == null ? null : new TeamDto(user.getTeam());
     }
 
     public Long getId() {
@@ -61,13 +58,5 @@ public class UserDto {
 
     public void setTeam(TeamDto team) {
         this.team = team;
-    }
-
-    public PomodoroDto getPomodoro() {
-        return pomodoro;
-    }
-
-    public void setPomodoro(PomodoroDto pomodoro) {
-        this.pomodoro = pomodoro;
     }
 }

@@ -1,36 +1,27 @@
 package eu.execom.pomodoro.service;
 
 import eu.execom.pomodoro.exceptions.DataViolationException;
-import eu.execom.pomodoro.exceptions.InvalidUsernameException;
 import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
-import eu.execom.pomodoro.model.CustomUserDetails;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) {
-        Optional<User> optionalUser = userRepository.findByEmail(username);
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-        if (!optionalUser.isPresent()) {
-            throw new InvalidUsernameException("Username not found.");
-        }
-        User user = optionalUser.get();
-
-        return new CustomUserDetails(user);
+    @Autowired
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public List<User> getAll() {
@@ -44,6 +35,7 @@ public class UserService implements UserDetailsService {
     public User save(User user) {
         validatePasswordLength(user);
         validateEmailExistence(user);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }

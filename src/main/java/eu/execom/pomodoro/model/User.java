@@ -1,7 +1,5 @@
 package eu.execom.pomodoro.model;
 
-import eu.execom.pomodoro.model.enumerations.Role;
-
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +10,7 @@ public class User {
     @Column
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private String email;
 
     @Column
@@ -23,9 +21,6 @@ public class User {
 
     @ManyToOne
     private Team team;
-
-    @Column
-    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Pomodoro pomodoro;
@@ -46,20 +41,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Team getTeam() {
@@ -72,14 +67,6 @@ public class User {
 
     public void setTeam(Team team) {
         this.team = team;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     public Pomodoro getPomodoro() {
@@ -99,7 +86,6 @@ public class User {
         this.email = user.getEmail();
         this.fullName = user.getFullName();
         this.password = user.getPassword();
-        this.role = user.getRole();
         this.team = user.getTeam();
     }
 
