@@ -8,7 +8,6 @@ public class TeamDto {
 
     private Long id;
 
-
     private String name;
 
     public TeamDto() {
