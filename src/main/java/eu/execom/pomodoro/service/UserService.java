@@ -28,9 +28,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getById(Long id) {
-        return userRepository.getOne(id);
-    }
+    public User getById(Long id) { return userRepository.getOne(id); }
+
+    public User getByTeamId(Long teamId) { return userRepository.getOne(teamId); }
 
     public User save(User user) {
         validatePasswordLength(user);

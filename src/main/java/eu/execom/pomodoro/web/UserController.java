@@ -71,6 +71,12 @@ public class UserController {
         return new ResponseEntity(new UserDto(user), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> getUserByTeamId(@PathVariable Long teamId) {
+        User user = userService.getByTeamId(teamId);
+        return new ResponseEntity(new UserDto(user), HttpStatus.OK);
+    }
+
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {
         User user = MODEL_MAPPER.map(userDto, User.class);
