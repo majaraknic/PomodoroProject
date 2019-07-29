@@ -71,11 +71,12 @@ public class UserController {
         return new ResponseEntity(new UserDto(user), HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<UserDto> getUserByTeamId(@PathVariable Long teamId) {
-//        User user = userService.getByTeamId(teamId);
-//        return new ResponseEntity(new UserDto(user), HttpStatus.OK);
-//    }
+    @GetMapping("/team/{id}")
+    public ResponseEntity<List<UserDto>> getUserByTeamId(@PathVariable Long teamId) {
+        List<User> users = userService.getByTeamId(teamId);
+        List<UserDto> userDtos = users.stream().map(UserDto::new).collect(Collectors.toList());
+        return new ResponseEntity(userDtos, HttpStatus.OK);
+    }
 
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {

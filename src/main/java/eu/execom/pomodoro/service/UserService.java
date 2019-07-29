@@ -30,7 +30,7 @@ public class UserService {
 
     public User getById(Long id) { return userRepository.getOne(id); }
 
-    //public User getByTeamId(Long teamId) { return userRepository.getOne(teamId); }
+    public List<User> getByTeamId(Long teamId) { return (List<User>) userRepository.getByTeamId(teamId); }
 
     public User save(User user) {
         validatePasswordLength(user);

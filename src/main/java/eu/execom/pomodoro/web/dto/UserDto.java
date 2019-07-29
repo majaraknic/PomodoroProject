@@ -14,7 +14,9 @@ public class UserDto {
 
     private String password;
 
-    private TeamDto team;
+//    private TeamDto team;
+
+    private Long teamId;
 
     public UserDto() {
         super();
@@ -25,7 +27,8 @@ public class UserDto {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.fullName = user.getFullName();
-        this.team = user.getTeam() == null ? null : new TeamDto(user.getTeam());
+//        this.team = user.getTeam() == null ? null : new TeamDto(user.getTeam());
+        this.teamId = user.getTeam().getId();
     }
 
     public Long getId() {
@@ -52,11 +55,20 @@ public class UserDto {
         this.fullName = fullName;
     }
 
-    public TeamDto getTeam() {
-        return team;
+//    public TeamDto getTeam() {
+//        return team;
+//    }
+//
+//    public void setTeam(TeamDto team) {
+//        this.team = team;
+//    }
+
+
+    public Long getTeamId() {
+        return teamId;
     }
 
-    public void setTeam(TeamDto team) {
-        this.team = team;
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }
