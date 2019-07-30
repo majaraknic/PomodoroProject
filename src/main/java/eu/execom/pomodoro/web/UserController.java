@@ -78,6 +78,12 @@ public class UserController {
         return new ResponseEntity(userDtos, HttpStatus.OK);
     }
 
+    @DeleteMapping("/team/{id}")
+    public ResponseEntity deleteByTeamId(@PathVariable Long teamId) {
+        userService.deleteByTeamId(teamId);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto userDto) {
         User user = MODEL_MAPPER.map(userDto, User.class);

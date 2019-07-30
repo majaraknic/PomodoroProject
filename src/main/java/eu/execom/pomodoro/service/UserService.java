@@ -32,6 +32,8 @@ public class UserService {
 
     public List<User> getByTeamId(Long teamId) { return (List<User>) userRepository.getByTeamId(teamId); }
 
+    public User deleteByTeamId(Long teamId) { return userRepository.deleteByTeamId(teamId); }
+
     public User save(User user) {
         validatePasswordLength(user);
         validateEmailExistence(user);
