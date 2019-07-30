@@ -72,14 +72,14 @@ public class UserController {
     }
 
     @GetMapping("/team/{id}")
-    public ResponseEntity<List<UserDto>> getUserByTeamId(@PathVariable Long teamId) {
+    public ResponseEntity<List<UserDto>> getUsersByTeamId(@PathVariable Long teamId) {
         List<User> users = userService.getByTeamId(teamId);
         List<UserDto> userDtos = users.stream().map(UserDto::new).collect(Collectors.toList());
         return new ResponseEntity(userDtos, HttpStatus.OK);
     }
 
     @DeleteMapping("/team/{id}")
-    public ResponseEntity deleteByTeamId(@PathVariable Long teamId) {
+    public ResponseEntity deleteUserByTeamId(@PathVariable Long teamId) {
         userService.deleteByTeamId(teamId);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
