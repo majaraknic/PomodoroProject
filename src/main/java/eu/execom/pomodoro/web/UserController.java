@@ -105,7 +105,7 @@ public class UserController {
         User createdUser = userService.save(user);
         pomodoroService.createNewPomodoro(createdUser);
 
-        return new ResponseEntity(new UserDto(createdUser), HttpStatus.OK);
+        return new ResponseEntity(new UserDto(createdUser), HttpStatus.CREATED);
     }
 
     private void validatePassword(@RequestBody UserRegistrationDto userRegistrationDto) {

@@ -41,7 +41,7 @@ public class TeamController {
 
         Team result = teamService.save(team);
 
-        return new ResponseEntity(new TeamDto(result), HttpStatus.OK);
+        return new ResponseEntity(new TeamDto(result), HttpStatus.CREATED);
     }
 
     @PutMapping

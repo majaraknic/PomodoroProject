@@ -40,7 +40,7 @@ public class PomodoroController {
         Pomodoro pomodoro = MODEL_MAPPER.map(pomodoroDto, Pomodoro.class);
         Pomodoro result = pomodoroService.save(pomodoro);
 
-        return new ResponseEntity(new PomodoroDto(result), HttpStatus.OK);
+        return new ResponseEntity(new PomodoroDto(result), HttpStatus.CREATED);
     }
 
     @PutMapping

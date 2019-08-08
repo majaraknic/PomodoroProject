@@ -28,7 +28,7 @@ public class UserDto {
         this.password = user.getPassword();
         this.fullName = user.getFullName();
 //        this.team = user.getTeam() == null ? null : new TeamDto(user.getTeam());
-        this.teamId = user.getTeam().getId();
+//        this.teamId = user.getTeam().getId();
     }
 
     public Long getId() {
