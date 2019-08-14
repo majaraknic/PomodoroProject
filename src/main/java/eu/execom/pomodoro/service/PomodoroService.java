@@ -1,5 +1,6 @@
 package eu.execom.pomodoro.service;
 
+import eu.execom.pomodoro.exceptions.NoEntityException;
 import eu.execom.pomodoro.model.Pomodoro;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.model.enumerations.Status;
@@ -7,7 +8,6 @@ import eu.execom.pomodoro.repository.PomodoroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class PomodoroService {
 
     public void delete(Long id) {
         if (!pomodoroRepository.existsById(id)) {
-            throw new EntityExistsException("Pomodoro with this id doesn't exist in database.");
+            throw new NoEntityException("Pomodoro with this id doesn't exist in database.");
         }
         pomodoroRepository.deleteById(id);
     }

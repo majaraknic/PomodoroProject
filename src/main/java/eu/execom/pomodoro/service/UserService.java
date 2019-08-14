@@ -1,6 +1,7 @@
 package eu.execom.pomodoro.service;
 
 import eu.execom.pomodoro.exceptions.DataViolationException;
+import eu.execom.pomodoro.exceptions.NoEntityException;
 import eu.execom.pomodoro.exceptions.NumberOfCharactersException;
 import eu.execom.pomodoro.model.User;
 import eu.execom.pomodoro.repository.UserRepository;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
 
 @Service
@@ -62,7 +62,7 @@ public class UserService {
 
     private void checkIfUserExists(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new EntityExistsException("User with this id doesn't exist in database.");
+            throw new NoEntityException("User with this id doesn't exist in database.");
         }
     }
 }

@@ -1,8 +1,8 @@
 package eu.execom.pomodoro.exceptions;
 
-import javax.persistence.EntityNotFoundException;
+import javax.persistence.EntityExistsException;
 
-public class NoEntityException extends EntityNotFoundException {
+public class NoEntityException extends EntityExistsException {
 
     public NoEntityException(String message) {
         super(message);
