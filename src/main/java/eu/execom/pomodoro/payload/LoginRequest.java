@@ -1,5 +1,7 @@
 package eu.execom.pomodoro.payload;
 
+/* Simple example of login request which contains email and password as parameters */
+
 public class LoginRequest {
 
     private String email;

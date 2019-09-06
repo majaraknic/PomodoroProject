@@ -3,6 +3,8 @@ package eu.execom.pomodoro.web.dto;
 import eu.execom.pomodoro.model.Team;
 import org.springframework.stereotype.Component;
 
+/* Data transfer object for entity Team */
+
 @Component
 public class TeamDto {
 

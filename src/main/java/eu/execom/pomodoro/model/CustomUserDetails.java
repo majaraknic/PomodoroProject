@@ -5,6 +5,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/* Class CustomUserDetails implements UserDetails interface which provides core user information */
+
 public class CustomUserDetails extends User implements UserDetails {
 
     @Override

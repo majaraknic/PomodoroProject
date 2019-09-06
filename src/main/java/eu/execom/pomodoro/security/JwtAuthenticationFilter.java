@@ -16,6 +16,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * JwtAuthenticationFilter extends OncePerRequestFilter which is
+ * filter base class that aims to guarantee a single execution per request
+ * dispatch, on any servlet container. It provides a {@link #doFilterInternal}
+ * method with HttpServletRequest and HttpServletResponse arguments.
+ */
+
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/* Data transfer object for entity Pomodoro */
 
 @Component
 public class PomodoroDto {

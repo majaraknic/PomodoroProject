@@ -3,6 +3,8 @@ package eu.execom.pomodoro.web.dto;
 import eu.execom.pomodoro.model.User;
 import org.springframework.stereotype.Component;
 
+/* Data transfer object for entity User */
+
 @Component
 public class UserDto {
 
